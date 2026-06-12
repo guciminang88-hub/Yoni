@@ -1,0 +1,27 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // 1. Global Safety Net default catch-all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+    
+    // Helper validation for document IDs to prevent poison injection
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-\\.]+$');
+    }
+    
+    // 2. Clear briefing database collection access rules
+    match /briefings/{emailId} {
+      allow read: if isValidId(emailId);
+      
+      allow write: if isValidId(emailId)
+        && request.resource.data.hotelName is string
+        && request.resource.data.hotelName.size() <= 100
+        && request.resource.data.portalName is string
+        && request.resource.data.portalName.size() <= 100
+        && request.resource.data.data is map;
+    }
+  }
+}

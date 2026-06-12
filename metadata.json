@@ -1,0 +1,6 @@
+{
+  "name": "morning briefing list",
+  "description": "Harper Premier Nagoya Batam - Digital morning briefing list and operational management portal with real-time multi-device cooperative cloud synchronization.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,35 @@
+{
+  "entities": {
+    "BriefingDocument": {
+      "title": "Briefing Document",
+      "description": "The complete morning briefing list data for a hotel",
+      "type": "object",
+      "properties": {
+        "hotelName": {
+          "type": "string",
+          "description": "The customizable brand name of the hotel"
+        },
+        "portalName": {
+          "type": "string",
+          "description": "The customizable title of the briefing list portal"
+        },
+        "data": {
+          "type": "object",
+          "description": "All briefing data modules (metrics, vipGuests, groups, forecasts, transports, custom operational tasks)"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp of the last modification"
+        }
+      },
+      "required": ["hotelName", "portalName", "data"]
+    }
+  },
+  "firestore": {
+    "/briefings/{emailId}": {
+      "schema": "BriefingDocument",
+      "description": "Persistent, instant real-time hotel morning briefing records segmented by identifying developer/user email, allowing multi-device responsive cooperation."
+    }
+  }
+}
